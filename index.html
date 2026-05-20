@@ -168,26 +168,63 @@
             let waktu_text = document.getElementById('waktu').value;
             let waktu_val = (waktu_text === '< 1 jam') ? 1 : (waktu_text === '1-2 jam') ? 2 : 3;
 
+            let organisasi_text = document.getElementById('organisasi').value;
+            let organisasi_val = (organisasi_text === 'Ya') ? 1 : 0;
+
             let prediksi = 0;
 
-            if (mengulang_val === 1 || sks_val === 1) {
-                prediksi = 0;
-            } else {
-                if (sks_val <= 2.50) {
-                    if (kehadiran_val <= 1.50) {
-                        prediksi = 0;
+            if (mengulang_val === 0) {
+                if (sks_val === 1) {
+                    prediksi = 0;
+                } else {
+                    if (kehadiran_val <= 2) {
+                        if (kehadiran_val === 1) {
+                            prediksi = 0;
+                        } else {
+                            if (sks_val === 2) {
+                                if (waktu_val === 1) {
+                                    prediksi = 0;
+                                } else if (waktu_val === 2) {
+                                    prediksi = 1;
+                                } else {
+                                    if (organisasi_val === 0) {
+                                        prediksi = 0;
+                                    } else {
+                                        prediksi = 1;
+                                    }
+                                }
+                            } else {
+                                prediksi = 1;
+                            }
+                        }
                     } else {
                         prediksi = 1;
                     }
-                } else {
-                    if (waktu_val <= 1.50) {
-                        if (kehadiran_val <= 1.50) {
+                }
+            } else {
+                if (kehadiran_val <= 2) {
+                    if (waktu_val <= 2) {
+                        prediksi = 0;
+                    } else {
+                        if (kehadiran_val === 1) {
                             prediksi = 0;
                         } else {
                             prediksi = 1;
                         }
+                    }
+                } else {
+                    if (sks_val === 1) {
+                        prediksi = 0;
                     } else {
-                        prediksi = 1;
+                        if (waktu_val === 1) {
+                            if (organisasi_val === 0) {
+                                prediksi = 0;
+                            } else {
+                                prediksi = 1;
+                            }
+                        } else {
+                            prediksi = 1;
+                        }
                     }
                 }
             }
